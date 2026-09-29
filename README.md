@@ -1,10 +1,8 @@
 # Stellar Burgers — Unit Tests
 
-Набор юнит-тестов для бизнес-логики класса `Burger` приложения Stellar Burgers.
+Юнит-тесты бизнес-логики класса `Burger` приложения Stellar Burgers.
 
-## Возможности
-
-Проверяется вся функциональность класса `Burger`:
+## Что проверяется
 
 - начальное состояние объекта;
 - установка булочки;
@@ -24,24 +22,24 @@
 - pytest
 - pytest-cov
 - unittest.mock
+- GitHub Actions
 
 ## Структура
 
 ```text
 stellar-burgers-unit-tests/
 ├── stellar_burgers/
-│   ├── __init__.py
 │   ├── bun.py
 │   ├── burger.py
 │   ├── database.py
 │   ├── ingredient.py
 │   └── ingredient_types.py
 ├── tests/
-│   ├── __init__.py
 │   ├── conftest.py
 │   ├── data.py
 │   └── test_burger.py
-├── .gitignore
+├── htmlcov/
+├── .github/workflows/
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
@@ -52,7 +50,6 @@ stellar-burgers-unit-tests/
 ```bash
 git clone https://github.com/q1nn2/stellar-burgers-unit-tests.git
 cd stellar-burgers-unit-tests
-git checkout develop1
 python -m venv venv
 ```
 
@@ -62,7 +59,7 @@ Windows:
 venv\Scripts\activate
 ```
 
-Установить зависимости:
+Установка зависимостей:
 
 ```bash
 pip install -r requirements.txt
@@ -76,8 +73,8 @@ pytest
 
 Проверка покрытия настроена в `pytest.ini`. Тестовый запуск завершается ошибкой, если покрытие `stellar_burgers.burger` ниже 100%.
 
-Явный запуск с отчётом покрытия:
+HTML-отчёт покрытия сохраняется в `htmlcov/`. На Windows его можно открыть командой:
 
-```bash
-pytest --cov=stellar_burgers.burger --cov-report=term-missing
+```powershell
+start htmlcov\index.html
 ```

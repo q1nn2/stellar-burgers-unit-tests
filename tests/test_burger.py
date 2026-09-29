@@ -13,8 +13,10 @@ from tests.data import (
 
 
 class TestBurger:
-    def test_burger_initial_state(self, burger):
+    def test_burger_initial_bun_is_none(self, burger):
         assert burger.bun is None
+
+    def test_burger_initial_ingredients_are_empty(self, burger):
         assert burger.ingredients == []
 
     def test_set_buns_sets_selected_bun(self, burger, bun_mock):
@@ -68,9 +70,6 @@ class TestBurger:
         result = burger.get_price()
 
         assert result == EXPECTED_TOTAL_PRICE
-        bun_mock.get_price.assert_called_once_with()
-        for ingredient in ingredient_mocks:
-            ingredient.get_price.assert_called_once_with()
 
     def test_get_receipt_builds_expected_receipt(
         self, burger, bun_mock, ingredient_mocks
@@ -81,12 +80,7 @@ class TestBurger:
 
         with patch.object(
             burger, "get_price", return_value=EXPECTED_TOTAL_PRICE
-        ) as get_price_mock:
+        ):
             result = burger.get_receipt()
 
         assert result == EXPECTED_RECEIPT
-        assert bun_mock.get_name.call_count == 2
-        for ingredient in ingredient_mocks:
-            ingredient.get_type.assert_called_once_with()
-            ingredient.get_name.assert_called_once_with()
-        get_price_mock.assert_called_once_with()

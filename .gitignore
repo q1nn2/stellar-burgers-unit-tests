@@ -12,7 +12,8 @@ venv/
 .pytest_cache/
 .coverage
 coverage.xml
-htmlcov/
+allure-results/
+allure-report/
 
 # IDE
 .idea/
